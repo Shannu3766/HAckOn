@@ -1,0 +1,56 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:hackon/screens/AuthScreen.dart';
+import 'package:hackon/screens/Update_faculty_details.dart';
+import 'package:hackon/screens/add_hackathon.dart';
+import 'package:hackon/screens/student_screen.dart';
+import 'package:hackon/screens/update_student_details.dart';
+import 'package:hackon/widgets/view_hackathon.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'FlutterChat',
+      home: Scaffold(
+        body: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final user = FirebaseAuth.instance.currentUser!;
+              final displayName = user.displayName;
+              final url = user.photoURL;
+              if (displayName == "Faculty") {
+                if (url == null) {
+                  return const UpdateFacultyDetails();
+                } else {
+                  return AddHackathon();
+                }
+              }
+              if (displayName == "Student") {
+                if (url == null) {
+                  return const UpdateStudentDetails();
+                } else {
+                  return Student_screen();
+                }
+              }
+            }
+            return const AuthScreen();
+          },
+        ),
+      ),
+    );
+  }
+}

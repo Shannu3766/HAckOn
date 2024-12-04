@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "816082488854",
+    "project_id": "hackon-bf7c5",
+    "storage_bucket": "hackon-bf7c5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816082488854:android:d8c1ae81c87a360684af37",
+        "android_client_info": {
+          "package_name": "com.example.hackon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiIJf8p4januqMlyLwKBzlNLvBinNVr18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
