@@ -30,6 +30,7 @@ class _ViewHackathonState extends State<ViewHackathon> {
             TimeOfDay.fromDateTime((data['endDate'] as Timestamp).toDate()),
         imageUrl: data['imageUrl'],
         createdBy: data['createdBy'],
+        iscompleted: false,
       );
     }).toList();
   }

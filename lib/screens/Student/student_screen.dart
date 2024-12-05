@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hackon/screens/hacakthon_view.dart';
-import 'package:hackon/screens/registred_hackathons.dart';
+import 'package:hackon/screens/Student/hacakthon_view.dart';
+import 'package:hackon/screens/Student/registred_hackathons.dart';
 import 'package:hackon/screens/wishlist.dart';
 import 'package:hackon/widgets/view_hackathon.dart';
 

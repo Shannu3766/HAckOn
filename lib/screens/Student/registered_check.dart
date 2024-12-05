@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/screens/hacakthon_view.dart';
-import 'package:hackon/widgets/placeholder_trait.dart';
+
 import 'package:transparent_image/transparent_image.dart';
 
 class hackathon_itemregister extends StatefulWidget {
@@ -16,7 +14,8 @@ class hackathon_itemregister extends StatefulWidget {
       required this.starttime,
       required this.hackathon,
       required this.iswishlist,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.iscompleted});
   final bool iswishlist;
   final String name;
   final String location;
@@ -24,35 +23,40 @@ class hackathon_itemregister extends StatefulWidget {
   final String imageUrl;
   final TimeOfDay starttime;
   final Hackathon hackathon;
+  final bool iscompleted;
   @override
   State<hackathon_itemregister> createState() => _hackathon_itemregisterState();
 }
 
 class _hackathon_itemregisterState extends State<hackathon_itemregister> {
   bool isaccepted = false;
-  bool iscompleted = false;
+
   final user = FirebaseAuth.instance.currentUser;
-  void checkcompleted() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection("Students")
-        .doc(user!.uid)
-        .collection("Registred")
-        .doc(widget.hackathon.id)
-        .get();
-    isaccepted = snapshot['isaccepted'];
-    iscompleted = snapshot['iscompleted'];
-  }
+  // void checkcompleted() async {
+  //   final snapshot = await FirebaseFirestore.instance
+  //       .collection("Students")
+  //       .doc(user!.uid)
+  //       .collection("Registred")
+  //       .doc(widget.hackathon.id)
+  //       .get();
+  //   isaccepted = snapshot['isaccepted'];
+  //   iscompleted = snapshot['iscompleted'];
+  //   print(isaccepted);
+  //   print("......................");
+  // }
 
   @override
   void initState() {
-    checkcompleted();
+    // checkcompleted();
+    print(widget.iscompleted);
+    print("sdafasdf............................");
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var time = widget.starttime.format(context);
-    var date = "${widget.startdate.day}/${widget.startdate.month}";
+    // var time = widget.starttime.format(context);
+    // var date = "${widget.startdate.day}/${widget.startdate.month}";
     return Card(
       child: Column(
         children: [
@@ -68,7 +72,7 @@ class _hackathon_itemregisterState extends State<hackathon_itemregister> {
                     image: NetworkImage(widget.imageUrl),
                   ),
                 ),
-                !iscompleted
+                !widget.iscompleted
                     ? Positioned(
                         left: 0,
                         right: 0,
@@ -106,7 +110,7 @@ class _hackathon_itemregisterState extends State<hackathon_itemregister> {
             height: 10,
           ),
           Text(
-            "Status  :${iscompleted ? "Completed" : "Not Yet completed"}",
+            "Status  :${widget.iscompleted ? "Completed" : "Not Yet completed"}",
             style: TextStyle(fontSize: 15),
           ),
           const SizedBox(

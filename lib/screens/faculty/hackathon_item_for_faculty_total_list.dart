@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/screens/Student/hacakthon_view.dart';
+// import 'package:hackon/screens/Student/hacakthon_view.dart';
+import 'package:hackon/screens/faculty/hackathonviewfaculty.dart';
 import 'package:hackon/widgets/placeholder_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class hackathon_item extends StatefulWidget {
-  const hackathon_item(
+class hackathon_item_for_faculty_total_list extends StatefulWidget {
+  const hackathon_item_for_faculty_total_list(
       {super.key,
       required this.name,
       required this.location,
@@ -22,10 +23,10 @@ class hackathon_item extends StatefulWidget {
   final TimeOfDay starttime;
   final Hackathon hackathon;
   @override
-  State<hackathon_item> createState() => _hackathon_itemState();
+  State<hackathon_item_for_faculty_total_list> createState() => _hackathon_item_for_faculty_total_listState();
 }
 
-class _hackathon_itemState extends State<hackathon_item> {
+class _hackathon_item_for_faculty_total_listState extends State<hackathon_item_for_faculty_total_list> {
   @override
   void initState() {
     super.initState();
@@ -39,7 +40,9 @@ class _hackathon_itemState extends State<hackathon_item> {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => hacakthonview(hackathon: widget.hackathon,iswishlist:widget.iswishlist,),
+            builder: (context) => hacakthonviewFaculty(
+              hackathon: widget.hackathon,
+            ),
           ));
         },
         child: Stack(

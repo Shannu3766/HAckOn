@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/screens/AuthScreen.dart';
-import 'package:hackon/screens/Update_faculty_details.dart';
+import 'package:hackon/screens/faculty/Faculty_screen.dart';
+import 'package:hackon/screens/faculty/Update_faculty_details.dart';
 import 'package:hackon/screens/add_hackathon.dart';
-import 'package:hackon/screens/student_screen.dart';
-import 'package:hackon/screens/update_student_details.dart';
+import 'package:hackon/screens/Student/student_screen.dart';
+import 'package:hackon/screens/Student/update_student_details.dart';
 import 'package:hackon/widgets/view_hackathon.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,11 +37,11 @@ class MyApp extends StatelessWidget {
                 if (url == null) {
                   return const UpdateFacultyDetails();
                 } else {
-                  return AddHackathon();
+                  return FacultyHomeScreen();
                 }
               }
               if (displayName == "Student") {
-                if (url == null) {
+                if (url == null){
                   return const UpdateStudentDetails();
                 } else {
                   return Student_screen();

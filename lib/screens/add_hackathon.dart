@@ -43,7 +43,7 @@ class _AddHackathonState extends State<AddHackathon> {
     final String storageAccountName = 'hackon';
     final String containerName = 'hackathons'; // Your container name
     final String sasToken =
-        'sp=racwdl&st=2024-12-04T13:44:50Z&se=2024-12-04T21:44:50Z&spr=https&sv=2022-11-02&sr=c&sig=%2F4U9PeTrBZIL52p2HQAbTLNw7PjSVmMgLRYPEB8KH6s%3D';
+        'sp=racwdl&st=2024-12-05T07:50:10Z&se=2025-04-17T15:50:10Z&spr=https&sv=2022-11-02&sr=c&sig=tLqATCVd%2BE9RNJ9yzdaMP8iFHpv1djGAha9DPZXs268%3D';
     final String blobName =
         'image_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
@@ -135,8 +135,8 @@ class _AddHackathonState extends State<AddHackathon> {
     setState(() {
       _isuploading = !_isuploading;
     });
-    var image_url = await uploadImageToAzure(_pickedImage!);
     try {
+      var image_url = await uploadImageToAzure(_pickedImage!);
       DateTime startDateTime =
           combineDateAndTime(_selectedStartDate!, _selectedStartTime!);
       DateTime endDateTime =
@@ -153,7 +153,7 @@ class _AddHackathonState extends State<AddHackathon> {
         'location': location,
         'startDate': startDateTime,
         'endDate': endDateTime,
-        "imageUrl": image_url ?? '',
+        "imageUrl": image_url,
         'createdBy': user.uid,
         'id': hacathonid
       });
@@ -245,17 +245,6 @@ class _AddHackathonState extends State<AddHackathon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Hackathon'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

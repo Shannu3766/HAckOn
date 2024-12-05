@@ -11,7 +11,7 @@ class Hackathon {
   final String imageUrl;
   final String createdBy;
   final String id;
-  bool? iscompleted;
+  final bool iscompleted;
   bool? isaccepted;
   Hackathon({
     required this.name,
@@ -24,5 +24,6 @@ class Hackathon {
     required this.id,
     required this.starttime,
     required this.endtime,
+    required this.iscompleted,
   });
 }

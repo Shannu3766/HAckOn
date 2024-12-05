@@ -187,6 +187,7 @@ class _hacakthonviewState extends State<hacakthonview> {
         "imageurl": imageurl,
         "student_college": student_college,
         "phonenumber": phonenumber,
+        "studentid": user!.uid,
       });
       setState(() {
         wishlist(widget.hackathon.createdBy, wishlist_id);

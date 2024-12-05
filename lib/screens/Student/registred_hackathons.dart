@@ -2,25 +2,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
+import 'package:hackon/screens/Student/registered_check.dart';
 import 'package:hackon/widgets/placeholder.dart';
 
-class Wishlistscreen extends StatefulWidget {
+class RegistredHackathons extends StatefulWidget {
   @override
-  _WishlistscreenState createState() => _WishlistscreenState();
+  _RegistredHackathonsState createState() => _RegistredHackathonsState();
 }
 
-class _WishlistscreenState extends State<Wishlistscreen> {
+class _RegistredHackathonsState extends State<RegistredHackathons> {
   late Future<List<Hackathon>> _hackathonsFuture;
   final user = FirebaseAuth.instance.currentUser;
 
   Future<List<Hackathon>> fetchHackathons() async {
-    final snapshot = await await FirebaseFirestore.instance
-        .collection("Students")
+    final snapshot = await FirebaseFirestore.instance
+        .collection('Students')
         .doc(user!.uid)
-        .collection("wishlist") // Replace with your sub-collection name
+        .collection("Registred")
         .get();
     return snapshot.docs.map((doc) {
       final data = doc.data();
+      bool iscom = data['iscompleted'];
+      print(iscom);
       return Hackathon(
         id: doc.id,
         name: data['name'],
@@ -34,7 +37,7 @@ class _WishlistscreenState extends State<Wishlistscreen> {
             TimeOfDay.fromDateTime((data['endDate'] as Timestamp).toDate()),
         imageUrl: data['imageUrl'],
         createdBy: data['createdBy'],
-        iscompleted: false,
+        iscompleted: iscom,
       );
     }).toList();
   }
@@ -64,7 +67,7 @@ class _WishlistscreenState extends State<Wishlistscreen> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_item(
+                child: hackathon_itemregister(
                   iswishlist: true,
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
@@ -72,6 +75,7 @@ class _WishlistscreenState extends State<Wishlistscreen> {
                   startdate: hackathon.startDate,
                   starttime: hackathon.starttime,
                   hackathon: hackathon,
+                  iscompleted: hackathon.iscompleted ?? false,
                 ),
               );
             },

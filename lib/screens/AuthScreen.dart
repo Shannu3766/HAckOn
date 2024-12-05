@@ -15,6 +15,9 @@ class _AuthScreenState extends State<AuthScreen> {
   var confirmpassword = "";
   bool islogin = true;
   bool isloading = false;
+  bool _obscurepassword = true;
+  bool _obscureconfirmpassword = true;
+
   final _formkey = GlobalKey<FormState>();
   final _firebase = FirebaseAuth.instance;
   void fetchDisplayName() {
@@ -49,7 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
           }
 
           // Update display name to the selected role
-         
+
           // ScaffoldMessenger.of(context).showSnackBar(
           //   SnackBar(
           //     content: Text('Logged in successfully as $selectedRole!'),
@@ -111,119 +114,202 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Form(
-                key: _formkey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: 'Email'),
-                      initialValue: "hello@gmail.com",
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value!.isEmpty || !value.contains('@')) {
-                          return 'Invalid email';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        username = value!;
-                      },
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(labelText: 'Password'),
-                      obscureText: true,
-                      initialValue: '1234567',
-                      validator: (value) {
-                        if (value!.isEmpty || value.length < 7) {
-                          return 'Password must be at least 7 characters long';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        password = value!;
-                      },
-                    ),
-                    if (!islogin)
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Confirm Password'),
-                        obscureText: true,
-                        initialValue: '1234567',
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 7) {
-                            return 'Password must be at least 7 characters long';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          confirmpassword = value!;
-                        },
-                      ),
-                    DropdownButtonFormField<String>(
-                      decoration:
-                          const InputDecoration(labelText: 'Select Role'),
-                      value: selectedRole,
-                      items: const [
-                        DropdownMenuItem(
-                          value: 'Student',
-                          child: Text('Student'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Faculty',
-                          child: Text('Faculty'),
-                        ),
-                      ],
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please select a role';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          selectedRole = value!;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _submit,
-                      child: Text(islogin ? 'Login' : 'Sign Up'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          islogin = !islogin;
-                        });
-                      },
-                      child: Text(islogin
-                          ? 'Create new account'
-                          : 'I already have an account'),
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          _firebase.signOut();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Logged out successfully!'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        },
-                        child: const Text("Adfa`"))
-                  ],
-                ),
-              ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blue,
+              Colors.blue,
+              // Colors.purple,
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/icon.jpg"),
+                  radius: MediaQuery.of(context).size.width * 0.3,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.09,
+                ),
+                Form(
+                  key: _formkey,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            initialValue: "hello@gmail.com",
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty || !value.contains('@')) {
+                                return 'Invalid email';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              username = value!;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscurepassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscurepassword = !_obscurepassword;
+                                  });
+                                },
+                              ),
+                            ),
+                            obscureText: _obscurepassword,
+                            initialValue: '1234567',
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 7) {
+                                return 'Password must be at least 7 characters long';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              password = value!;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          if (!islogin)
+                            TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Confirm Password',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureconfirmpassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureconfirmpassword =
+                                          !_obscureconfirmpassword;
+                                    });
+                                  },
+                                ),
+                              ),
+                              obscureText: true,
+                              initialValue: '1234567',
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 7) {
+                                  return 'Password must be at least 7 characters long';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                confirmpassword = value!;
+                              },
+                            ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          DropdownButtonFormField<String>(
+                            decoration: const InputDecoration(
+                              labelText: 'Select Role',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            value: selectedRole,
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'Student',
+                                child: Text('Student'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Faculty',
+                                child: Text('Faculty'),
+                              ),
+                            ],
+                            validator: (value) {
+                              if (value == null) {
+                                return 'Please select a role';
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                selectedRole = value!;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: _submit,
+                            child: Text(islogin ? 'Login' : 'Sign Up'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                islogin = !islogin;
+                              });
+                            },
+                            child: Text(islogin
+                                ? 'Create new account'
+                                : 'I already have an account'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,25 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/screens/registered_check.dart';
+import 'package:hackon/screens/faculty/hackathon_item_for_faculty_total_list.dart';
 import 'package:hackon/widgets/placeholder.dart';
 
-class RegistredHackathons extends StatefulWidget {
+class totalhackathonlist extends StatefulWidget {
   @override
-  _RegistredHackathonsState createState() => _RegistredHackathonsState();
+  _totalhackathonlistState createState() => _totalhackathonlistState();
 }
 
-class _RegistredHackathonsState extends State<RegistredHackathons> {
+class _totalhackathonlistState extends State<totalhackathonlist> {
   late Future<List<Hackathon>> _hackathonsFuture;
-  final user = FirebaseAuth.instance.currentUser;
 
   Future<List<Hackathon>> fetchHackathons() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection('Students')
-        .doc(user!.uid)
-        .collection("Registred")
-        .get();
+    final snapshot =
+        await FirebaseFirestore.instance.collection("hackathons").get();
     return snapshot.docs.map((doc) {
       final data = doc.data();
       return Hackathon(
@@ -35,6 +30,7 @@ class _RegistredHackathonsState extends State<RegistredHackathons> {
             TimeOfDay.fromDateTime((data['endDate'] as Timestamp).toDate()),
         imageUrl: data['imageUrl'],
         createdBy: data['createdBy'],
+        iscompleted: false,
       );
     }).toList();
   }
@@ -64,14 +60,14 @@ class _RegistredHackathonsState extends State<RegistredHackathons> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_itemregister(
-                  iswishlist: true,
+                child: hackathon_item_for_faculty_total_list(
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
                   location: hackathon.location,
                   startdate: hackathon.startDate,
                   starttime: hackathon.starttime,
                   hackathon: hackathon,
+                  iswishlist: false,
                 ),
               );
             },
