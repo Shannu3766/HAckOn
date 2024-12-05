@@ -36,37 +36,27 @@ class _UpdateFacultyDetailsState extends State<UpdateFacultyDetails> {
   }
 
   Future<String?> uploadImageToAzure(File imageFile) async {
-    // Replace with your storage account details and SAS token
-    final String storageAccountName = 'hackon';
-    final String containerName = 'photos'; // Your container name
-    final String sasToken =
-        'sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-05-08T14:10:47Z&st=2024-12-04T06:10:47Z&spr=https&sig=%2BcIA9xzL0VKJanJCMumpXs93dy3do%2FHdqJqv3SbW8BY%3D'; // SAS Token
-
-    // Generate the blob name dynamically or use a predefined name
+    const String storageAccountName = 'hackon';
+    const String containerName = 'photos';
+    const String sasToken =
+        'sp=racwdl&st=2024-12-05T14:47:56Z&se=2024-12-27T22:47:56Z&spr=https&sv=2022-11-02&sr=c&sig=VhMf6V2JUb86jGCQLt4a6Df9k4ih9254zYSRvhax7N4%3D';
     final String blobName = 'image_${user.uid}.jpg';
-
-    // Construct the full upload URL
     final String uploadUrl =
         'https://$storageAccountName.blob.core.windows.net/$containerName/$blobName?$sasToken';
 
     try {
-      // Read the image bytes
       final imageBytes = await imageFile.readAsBytes();
-
-      // Make the PUT request to upload the image
       final response = await http.put(
         Uri.parse(uploadUrl),
         headers: {
-          'x-ms-blob-type': 'BlockBlob', // Mandatory header for block blobs
-          'Content-Type':
-              'image/jpeg', // Ensure the content type matches your file
+          'x-ms-blob-type': 'BlockBlob',
+          'Content-Type': 'image/jpeg',
         },
         body: imageBytes,
       );
 
       if (response.statusCode == 201) {
         print('Image uploaded successfully!');
-        // Return the image URL (excluding SAS token for sharing purposes)
         return uploadUrl.split('?')[0];
       } else {
         print('Failed to upload image. Status Code: ${response.statusCode}');
@@ -143,7 +133,7 @@ class _UpdateFacultyDetailsState extends State<UpdateFacultyDetails> {
             onPressed: () {
               FirebaseAuth.instance.signOut();
             },
-            label: Text(
+            label: const Text(
               "Logout",
               style: TextStyle(
                 color: Colors.white,
@@ -153,153 +143,156 @@ class _UpdateFacultyDetailsState extends State<UpdateFacultyDetails> {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [Colors.blue, Colors.blue])),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: MediaQuery.of(context).size.width * 0.25,
-              backgroundImage: _pickedImage == null
-                  ? const NetworkImage(
-                      'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-                  : FileImage(_pickedImage!),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            ElevatedButton.icon(
-              onPressed: _pickImage,
-              icon: const Icon(
-                Icons.image,
-                color: Colors.black,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: MediaQuery.of(context).size.width * 0.25,
+                backgroundImage: _pickedImage == null
+                    ? const NetworkImage(
+                        'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+                    : FileImage(_pickedImage!),
               ),
-              label: const Text(
-                'Pick Image',
-                style: TextStyle(color: Colors.black),
+              const SizedBox(
+                height: 5,
               ),
-            ),
-            // SizedBox(
-            //   height: 10,
-            // ),
-            Card(
-              margin: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        initialValue: "shanmukha srinivas",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your name';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          name = value!;
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'College',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        initialValue: "amrita visea vidyapetham",
-                        onSaved: (value) {
-                          college = value!;
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Department',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        initialValue: "cse",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your department';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          department = value!;
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Phone Number',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        keyboardType: TextInputType.phone,
-                        initialValue: "1234567890",
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 10) {
-                            return 'Invalid phone number';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          phonenumber = value!;
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.save),
-                        style: ElevatedButton.styleFrom(
-                            iconColor: const Color.fromARGB(255, 255, 255, 255),
-                            backgroundColor: Colors.black),
-                        onPressed: _isUploading ? null : _submit,
-                        label: _isUploading
-                            ? const CircularProgressIndicator()
-                            : const Text(
-                                'Submit',
-                                style: TextStyle(color: Colors.white),
+              ElevatedButton.icon(
+                onPressed: _pickImage,
+                icon: const Icon(
+                  Icons.image,
+                  color: Colors.black,
+                ),
+                label: const Text(
+                  'Pick Image',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Card(
+                margin: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Name',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
                               ),
-                      ),
-                    ],
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "shanmukha srinivas",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            name = value!;
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'College',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "amrita visea vidyapetham",
+                          onSaved: (value) {
+                            college = value!;
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Department',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "cse",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your department';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            department = value!;
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Phone Number',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          keyboardType: TextInputType.phone,
+                          initialValue: "1234567890",
+                          validator: (value) {
+                            if (value!.isEmpty || value.length < 10) {
+                              return 'Invalid phone number';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            phonenumber = value!;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton.icon(
+                          icon: Icon(Icons.save),
+                          style: ElevatedButton.styleFrom(
+                              iconColor:
+                                  const Color.fromARGB(255, 255, 255, 255),
+                              backgroundColor: Colors.black),
+                          onPressed: _isUploading ? null : _submit,
+                          label: _isUploading
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

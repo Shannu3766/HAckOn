@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/screens/add_hackathon.dart';
+import 'package:hackon/screens/faculty/Profilepage.dart';
 import 'package:hackon/screens/faculty/faculty_hackathons.dart';
 import 'package:hackon/screens/faculty/totalhackathonlist.dart';
 
@@ -17,24 +18,21 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
     Expanded(child: totalhackathonlist()),
     viewmyhackathons(),
     AddHackathon(),
-    // Wishlistscreen(),
-    // RegistredHackathons(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("HackON"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: Icon(Icons.exit_to_app))
-        ],
+        backgroundColor: Colors.blue,
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        // backgroundColor,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black,
         currentIndex: _currentIndex, // Highlight the selected item
         onTap: (index) {
           setState(() {
@@ -48,11 +46,15 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
-            label: 'Wishlist',
+            label: 'My',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Create',
+            label: 'New Hackathon',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

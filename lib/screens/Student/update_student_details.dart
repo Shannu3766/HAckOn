@@ -43,7 +43,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
     final String storageAccountName = 'hackon';
     final String containerName = 'photos'; // Your container name
     final String sasToken =
-        'sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-05-08T14:10:47Z&st=2024-12-04T06:10:47Z&spr=https&sig=%2BcIA9xzL0VKJanJCMumpXs93dy3do%2FHdqJqv3SbW8BY%3D'; // SAS Token
+        'sp=racwdl&st=2024-12-05T14:47:56Z&se=2024-12-27T22:47:56Z&spr=https&sv=2022-11-02&sr=c&sig=VhMf6V2JUb86jGCQLt4a6Df9k4ih9254zYSRvhax7N4%3D';
 
     // Generate the blob name dynamically or use a predefined name
     final String blobName = 'image_${user.uid}.jpg';
@@ -131,7 +131,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Student Details'),
+        title: const Text('HAckOn'),
         actions: [
           IconButton(
             onPressed: () {
@@ -142,133 +142,211 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: _pickedImage == null
-                  ? const NetworkImage(
-                      'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-                  : FileImage(_pickedImage!),
-            ),
-            TextButton.icon(
-              onPressed: _pickImage,
-              icon: const Icon(Icons.image),
-              label: const Text('Pick Image'),
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(labelText: 'Name'),
-                    initialValue: "shanmukah srinivas",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your name';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      name = value!;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(labelText: 'College'),
-                    initialValue: "amrita visea vidyapetham",
-                    onSaved: (value) {
-                      college = value!;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(labelText: 'Department'),
-                    initialValue: "cse",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your department';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      department = value!;
-                    },
-                  ),
-                  TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Phone Number'),
-                    keyboardType: TextInputType.phone,
-                    initialValue: "1234567890",
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 10) {
-                        return 'Invalid phone number';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      phonenumber = value!;
-                    },
-                  ),
-                  DropdownButtonFormField<String>(
-                    decoration:
-                        const InputDecoration(labelText: 'Select Semster'),
-                    value: Semster,
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Sem1',
-                        child: Text('Sem1'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem2',
-                        child: Text('Sem2'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem3',
-                        child: Text('Sem3'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem4',
-                        child: Text('Sem4'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem5',
-                        child: Text('Sem5'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem6',
-                        child: Text('Sem6'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem7',
-                        child: Text('Sem7'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Sem8',
-                        child: Text('Sem8'),
-                      ),
-                    ],
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please select a Semster';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        Semster = value!;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _isUploading ? null : _submit,
-                    child: _isUploading
-                        ? const CircularProgressIndicator()
-                        : const Text('Submit'),
-                  ),
-                ],
+        child: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(colors: [Colors.blue, Colors.blue])),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 15,
               ),
-            ),
-          ],
+              CircleAvatar(
+                radius: MediaQuery.of(context).size.width * 0.25,
+                backgroundImage: _pickedImage == null
+                    ? const NetworkImage(
+                        'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+                    : FileImage(_pickedImage!),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              ElevatedButton.icon(
+                onPressed: _pickImage,
+                icon: const Icon(
+                  Icons.image,
+                  color: Colors.black,
+                ),
+                label: const Text(
+                  'Pick Image',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Card(
+                margin: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Name',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "shanmukah srinivas",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            name = value!;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'College',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "amrita visea vidyapetham",
+                          onSaved: (value) {
+                            college = value!;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Department',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          initialValue: "cse",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your department';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            department = value!;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Phone Number',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          keyboardType: TextInputType.phone,
+                          initialValue: "1234567890",
+                          validator: (value) {
+                            if (value!.isEmpty || value.length < 10) {
+                              return 'Invalid phone number';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            phonenumber = value!;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'Select Semster',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          value: Semster,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'Sem1',
+                              child: Text('Sem1'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem2',
+                              child: Text('Sem2'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem3',
+                              child: Text('Sem3'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem4',
+                              child: Text('Sem4'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem5',
+                              child: Text('Sem5'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem6',
+                              child: Text('Sem6'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem7',
+                              child: Text('Sem7'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Sem8',
+                              child: Text('Sem8'),
+                            ),
+                          ],
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select a Semster';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              Semster = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton.icon(
+                          icon: Icon(Icons.upload),
+                          onPressed: _isUploading ? null : _submit,
+                          label: _isUploading
+                              ? const CircularProgressIndicator()
+                              : const Text('Submit'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
         ),
       ),
     );

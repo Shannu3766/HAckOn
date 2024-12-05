@@ -127,96 +127,57 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         ),
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/icon.jpg"),
-                  radius: MediaQuery.of(context).size.width * 0.3,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.09,
-                ),
-                Form(
-                  key: _formkey,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10.0),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.black,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/icon.jpg"),
+                    radius: MediaQuery.of(context).size.width * 0.3,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.09,
+                  ),
+                  Form(
+                    key: _formkey,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                labelText: 'Email',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
+                              initialValue: "hello@gmail.com",
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value!.isEmpty || !value.contains('@')) {
+                                  return 'Invalid email';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                username = value!;
+                              },
                             ),
-                            initialValue: "hello@gmail.com",
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value!.isEmpty || !value.contains('@')) {
-                                return 'Invalid email';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              username = value!;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10.0),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscurepassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _obscurepassword = !_obscurepassword;
-                                  });
-                                },
-                              ),
+                            const SizedBox(
+                              height: 20,
                             ),
-                            obscureText: _obscurepassword,
-                            initialValue: '1234567',
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 7) {
-                                return 'Password must be at least 7 characters long';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              password = value!;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          if (!islogin)
                             TextFormField(
                               decoration: InputDecoration(
-                                labelText: 'Confirm Password',
-                                border: OutlineInputBorder(
+                                labelText: 'Password',
+                                border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10.0),
                                   ),
@@ -226,19 +187,18 @@ class _AuthScreenState extends State<AuthScreen> {
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureconfirmpassword
+                                    _obscurepassword
                                         ? Icons.visibility
                                         : Icons.visibility_off,
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      _obscureconfirmpassword =
-                                          !_obscureconfirmpassword;
+                                      _obscurepassword = !_obscurepassword;
                                     });
                                   },
                                 ),
                               ),
-                              obscureText: true,
+                              obscureText: _obscurepassword,
                               initialValue: '1234567',
                               validator: (value) {
                                 if (value!.isEmpty || value.length < 7) {
@@ -247,68 +207,110 @@ class _AuthScreenState extends State<AuthScreen> {
                                 return null;
                               },
                               onSaved: (value) {
-                                confirmpassword = value!;
+                                password = value!;
                               },
                             ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          DropdownButtonFormField<String>(
-                            decoration: const InputDecoration(
-                              labelText: 'Select Role',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10.0),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
-                              ),
+                            const SizedBox(
+                              height: 10,
                             ),
-                            value: selectedRole,
-                            items: const [
-                              DropdownMenuItem(
-                                value: 'Student',
-                                child: Text('Student'),
+                            if (!islogin)
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'Confirm Password',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10.0),
+                                    ),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscureconfirmpassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureconfirmpassword =
+                                            !_obscureconfirmpassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText: true,
+                                initialValue: '1234567',
+                                validator: (value) {
+                                  if (value!.isEmpty || value.length < 7) {
+                                    return 'Password must be at least 7 characters long';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) {
+                                  confirmpassword = value!;
+                                },
                               ),
-                              DropdownMenuItem(
-                                value: 'Faculty',
-                                child: Text('Faculty'),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            DropdownButtonFormField<String>(
+                              decoration: const InputDecoration(
+                                labelText: 'Select Role',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
-                            ],
-                            validator: (value) {
-                              if (value == null) {
-                                return 'Please select a role';
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                selectedRole = value!;
-                              });
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: _submit,
-                            child: Text(islogin ? 'Login' : 'Sign Up'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                islogin = !islogin;
-                              });
-                            },
-                            child: Text(islogin
-                                ? 'Create new account'
-                                : 'I already have an account'),
-                          ),
-                        ],
+                              value: selectedRole,
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Student',
+                                  child: Text('Student'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Faculty',
+                                  child: Text('Faculty'),
+                                ),
+                              ],
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Please select a role';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedRole = value!;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: _submit,
+                              child: Text(islogin ? 'Login' : 'Sign Up'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  islogin = !islogin;
+                                });
+                              },
+                              child: Text(islogin
+                                  ? 'Create new account'
+                                  : 'I already have an account'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

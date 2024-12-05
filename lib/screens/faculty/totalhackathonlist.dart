@@ -43,7 +43,8 @@ class _totalhackathonlistState extends State<totalhackathonlist> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Hackathon>>(
+    return Scaffold(
+        body: FutureBuilder<List<Hackathon>>(
       future: _hackathonsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -74,6 +75,6 @@ class _totalhackathonlistState extends State<totalhackathonlist> {
           );
         }
       },
-    );
+    ));
   }
 }
