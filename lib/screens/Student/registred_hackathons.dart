@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
 import 'package:hackon/screens/Student/registered_check.dart';
-import 'package:hackon/widgets/placeholder.dart';
 
 class RegistredHackathons extends StatefulWidget {
   @override
@@ -54,11 +53,11 @@ class _RegistredHackathonsState extends State<RegistredHackathons> {
       future: _hackathonsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No Hackathons Available'));
+          return const Center(child: Text('No Hackathons Available'));
         } else {
           final hackathons = snapshot.data!;
           return ListView.builder(
@@ -75,7 +74,7 @@ class _RegistredHackathonsState extends State<RegistredHackathons> {
                   startdate: hackathon.startDate,
                   starttime: hackathon.starttime,
                   hackathon: hackathon,
-                  iscompleted: hackathon.iscompleted ?? false,
+                  iscompleted: hackathon.iscompleted,
                 ),
               );
             },

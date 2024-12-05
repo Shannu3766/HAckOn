@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:http/http.dart' as http;
 
 class UpdateStudentDetails extends StatefulWidget {
   const UpdateStudentDetails({super.key});
@@ -40,9 +38,9 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
 
   Future<String?> uploadImageToAzure(File imageFile) async {
     // Replace with your storage account details and SAS token
-    final String storageAccountName = 'hackon';
-    final String containerName = 'photos'; // Your container name
-    final String sasToken =
+    const String storageAccountName = 'hackon';
+    const String containerName = 'photos'; // Your container name
+    const String sasToken =
         'sp=racwdl&st=2024-12-05T14:47:56Z&se=2024-12-27T22:47:56Z&spr=https&sv=2022-11-02&sr=c&sig=VhMf6V2JUb86jGCQLt4a6Df9k4ih9254zYSRvhax7N4%3D';
 
     // Generate the blob name dynamically or use a predefined name

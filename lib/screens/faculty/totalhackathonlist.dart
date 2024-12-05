@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
 import 'package:hackon/screens/faculty/hackathon_item_for_faculty_total_list.dart';
-import 'package:hackon/widgets/placeholder.dart';
+
 
 class totalhackathonlist extends StatefulWidget {
   @override

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/screens/add_hackathon.dart';
 import 'package:hackon/screens/faculty/Profilepage.dart';

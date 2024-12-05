@@ -1,8 +1,6 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/screens/faculty/registres_students.dart';
 import 'package:hackon/widgets/placeholder_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
