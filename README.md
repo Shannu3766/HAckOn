@@ -47,7 +47,20 @@ Before you begin, ensure you have met the following requirements:
 
 ## Setup Instructions
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/hackon.git
-   cd hackon
+1. **Install dependencies**:
+    ```bash
+    flutter pub get
+    ```
+
+2. **Firebase Configuration**:
+    - Add your `google-services.json` file to the `android/app` directory.
+    - Add your `GoogleService-Info.plist` file to the `ios/Runner` directory.
+
+3. **Configure Azure Blob Storage**:
+    - Update the `uploadImageToAzure` method in the code with your Azure Storage account name, container name, and SAS token.
+
+4. **Run the project**:
+    ```bash
+    flutter run
+    ```
+
