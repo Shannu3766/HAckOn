@@ -60,14 +60,14 @@ class _ViewHackathonState extends State<ViewHackathon> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_item(
+                child: HackathonItem(
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
                   location: hackathon.location,
-                  startdate: hackathon.startDate,
-                  starttime: hackathon.starttime,
+                  startDate: hackathon.startDate,
+                  startTime: hackathon.starttime,
                   hackathon: hackathon,
-                  iswishlist: false,
+                  isWishlist: false,
                 ),
               );
             },

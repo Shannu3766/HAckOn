@@ -80,11 +80,11 @@ class _otherhackathonsState extends State<otherhackathons> {
               ),
               Row(
                 children: [
-                  Traititem_view(
+                  Traititem(
                       icon: Icons.location_on,
                       label: widget.hackathon.location),
                   Spacer(),
-                  Traititem_view(icon: Icons.calendar_month, label: date),
+                  Traititem(icon: Icons.calendar_month, label: date),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.1)
                 ],
               ),

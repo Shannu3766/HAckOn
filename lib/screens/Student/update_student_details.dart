@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hackon/screens/Student/student_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -123,6 +124,9 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Student details updated successfully!')),
     );
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return const Student_screen();
+    }));
   }
 
   @override
@@ -189,7 +193,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
                               ),
                             ),
                           ),
-                          initialValue: "shanmukah srinivas",
+                          // initialValue: "shanmukah srinivas",
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your name';
@@ -213,7 +217,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
                               ),
                             ),
                           ),
-                          initialValue: "amrita visea vidyapetham",
+                          // initialValue: "amrita visea vidyapetham",
                           onSaved: (value) {
                             college = value!;
                           },
@@ -231,7 +235,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
                               ),
                             ),
                           ),
-                          initialValue: "cse",
+                          // initialValue: "cse",
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your department';
@@ -256,7 +260,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
                             ),
                           ),
                           keyboardType: TextInputType.phone,
-                          initialValue: "1234567890",
+                          // initialValue: "1234567890",
                           validator: (value) {
                             if (value!.isEmpty || value.length < 10) {
                               return 'Invalid phone number';

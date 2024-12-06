@@ -208,13 +208,185 @@ class _hacakthonviewState extends State<hacakthonview> {
     super.initState();
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   var date =
+  //       '${widget.hackathon.startDate.day}/${widget.hackathon.startDate.month}';
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text(widget.hackathon.name),
+  //       actions: [
+  //         widget.iswishlist
+  //             ? const SizedBox()
+  //             : IconButton(
+  //                 onPressed: () {
+  //                   FirebaseAuth.instance.signOut();
+  //                 },
+  //                 icon: Icon(Icons.exit_to_app))
+  //       ],
+  //     ),
+  //     body: SingleChildScrollView(
+  //       child: Padding(
+  //         padding: EdgeInsets.only(
+  //           left: MediaQuery.of(context).size.width * 0.05,
+  //           right: MediaQuery.of(context).size.width * 0.05,
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.only(top: 10, bottom: 10),
+  //               child: Container(
+  //                 width: MediaQuery.of(context).size.width * 0.9,
+  //                 height: MediaQuery.of(context).size.height * 0.2,
+  //                 child: FadeInImage(
+  //                   placeholder: MemoryImage(kTransparentImage),
+  //                   image: NetworkImage(widget.hackathon.imageUrl),
+  //                 ),
+  //               ),
+  //             ),
+  //             const Text(
+  //               "Workshop Details",
+  //               style: TextStyle(
+  //                 color: Colors.black,
+  //                 fontSize: 30,
+  //               ),
+  //               textAlign: TextAlign.left,
+  //             ),
+  //             const SizedBox(
+  //               height: 20,
+  //             ),
+  //             Row(
+  //               children: [
+  //                 Traititem(
+  //                     icon: Icons.location_on,
+  //                     label: widget.hackathon.location),
+  //                 Spacer(),
+  //                 Traititem(icon: Icons.calendar_month, label: date),
+  //                 SizedBox(width: MediaQuery.of(context).size.width * 0.1)
+  //               ],
+  //             ),
+  //             const SizedBox(
+  //               height: 20,
+  //             ),
+  //             const Align(
+  //               alignment: Alignment.centerLeft,
+  //               child: Text(
+  //                 "About",
+  //                 style: TextStyle(
+  //                   color: Colors.black,
+  //                   fontSize: 25,
+  //                 ),
+  //               ),
+  //             ),
+  //             Text(widget.hackathon.description),
+  //             const SizedBox(
+  //               height: 30,
+  //             ),
+  //             const Text(
+  //               "Faculty Details",
+  //               style: TextStyle(
+  //                 color: Colors.black,
+  //                 fontSize: 30,
+  //               ),
+  //               textAlign: TextAlign.left,
+  //             ),
+  //             Row(
+  //               children: [
+  //                 CircleAvatar(
+  //                   backgroundImage: NetworkImage(faculty_image),
+  //                   radius: 30,
+  //                 ),
+  //                 const SizedBox(
+  //                   width: 20,
+  //                 ),
+  //                 Text(
+  //                   faculty_name,
+  //                   style: TextStyle(fontSize: 15),
+  //                 )
+  //               ],
+  //             ),
+  //             const SizedBox(
+  //               height: 40,
+  //             ),
+  //             Padding(
+  //               padding: const EdgeInsets.only(bottom: 20),
+  //               child: registred_to_hackathon
+  //                   ? Row(
+  //                       children: [
+  //                         Expanded(
+  //                             child: ElevatedButton.icon(
+  //                                 style: ElevatedButton.styleFrom(
+  //                                   backgroundColor: Colors.green,
+  //                                 ),
+  //                                 onPressed: () {},
+  //                                 label: Text("Registred"))),
+  //                       ],
+  //                     )
+  //                   : Row(
+  //                       children: [
+  //                         widget.iswishlist
+  //                             ? const SizedBox(
+  //                                 width: 0,
+  //                               )
+  //                             : Expanded(
+  //                                 child: ElevatedButton.icon(
+  //                                   icon: ispresent
+  //                                       ? Icon(Icons.highlight_remove)
+  //                                       : Icon(Icons.add),
+  //                                   style: ElevatedButton.styleFrom(
+  //                                     backgroundColor: const Color.fromARGB(
+  //                                         255, 54, 235, 244),
+  //                                   ),
+  //                                   onPressed: () {
+  //                                     ispresent
+  //                                         ? removehackathonfromwishlist()
+  //                                         : add_hackathonto_wishlist();
+  //                                     setState(() {
+  //                                       wishlist(widget.hackathon.createdBy,
+  //                                           wishlist_id);
+  //                                     });
+  //                                   },
+  //                                   label: ispresent
+  //                                       ? Text("Wishlist")
+  //                                       : Text("Add to Wishlist"),
+  //                                 ),
+  //                               ),
+  //                         const SizedBox(
+  //                             width: 10), // Add spacing between the buttons
+  //                         Expanded(
+  //                           child: ElevatedButton(
+  //                             style: ElevatedButton.styleFrom(
+  //                               backgroundColor: Colors.green,
+  //                             ),
+  //                             onPressed: () {
+  //                               register_to_hackathon();
+  //                               setState(() {
+  //                                 isregistred(registred);
+  //                               });
+  //                             },
+  //                             child: Text("Register"),
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
   @override
   Widget build(BuildContext context) {
     var date =
         '${widget.hackathon.startDate.day}/${widget.hackathon.startDate.month}';
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.hackathon.name),
+        title: Text(
+          widget.hackathon.name,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           widget.iswishlist
               ? const SizedBox()
@@ -222,120 +394,148 @@ class _hacakthonviewState extends State<hacakthonview> {
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
                   },
-                  icon: Icon(Icons.exit_to_app))
+                  icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+                ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.05,
-            right: MediaQuery.of(context).size.width * 0.05,
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Hackathon Image
               Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.2,
-                  child: FadeInImage(
-                    placeholder: MemoryImage(kTransparentImage),
-                    image: NetworkImage(widget.hackathon.imageUrl),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 10,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: NetworkImage(widget.hackathon.imageUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
+
+              // Workshop Details
               const Text(
                 "Workshop Details",
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.left,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 15),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Traititem_view(
-                      icon: Icons.location_on,
-                      label: widget.hackathon.location),
-                  Spacer(),
-                  Traititem_view(icon: Icons.calendar_month, label: date),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.1)
+                  Abouthacko(
+                    icon: Icons.location_on_outlined,
+                    label: widget.hackathon.location,
+                  ),
+                  Abouthacko(
+                    icon: Icons.calendar_today_outlined,
+                    label: date,
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "About",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                  ),
+              const SizedBox(height: 25),
+
+              // About Section
+              const Text(
+                "About",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(widget.hackathon.description),
-              const SizedBox(
-                height: 30,
+              const SizedBox(height: 10),
+              Text(
+                widget.hackathon.description,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[700],
+                  height: 1.5,
+                ),
               ),
+              const SizedBox(height: 30),
+
+              // Faculty Details
               const Text(
                 "Faculty Details",
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.left,
               ),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(faculty_image),
                     radius: 30,
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  const SizedBox(width: 15),
                   Text(
                     faculty_name,
-                    style: TextStyle(fontSize: 15),
-                  )
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 40,
-              ),
+              const SizedBox(height: 40),
+
+              // Action Buttons
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: registred_to_hackathon
-                    ? Row(
-                        children: [
-                          Expanded(
-                              child: ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                  ),
-                                  onPressed: () {},
-                                  label: Text("Registred"))),
-                        ],
+                    ? Center(
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {},
+                          icon: const Icon(Icons.check_circle_outline),
+                          label: const Text("Registered"),
+                        ),
                       )
                     : Row(
                         children: [
                           widget.iswishlist
-                              ? const SizedBox(
-                                  width: 0,
-                                )
+                              ? const SizedBox()
                               : Expanded(
                                   child: ElevatedButton.icon(
                                     icon: ispresent
-                                        ? Icon(Icons.highlight_remove)
-                                        : Icon(Icons.add),
+                                        ? const Icon(Icons.highlight_remove)
+                                        : const Icon(Icons.add),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color.fromARGB(
                                           255, 54, 235, 244),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
                                     ),
                                     onPressed: () {
                                       ispresent
@@ -347,16 +547,20 @@ class _hacakthonviewState extends State<hacakthonview> {
                                       });
                                     },
                                     label: ispresent
-                                        ? Text("Wishlist")
-                                        : Text("Add to Wishlist"),
+                                        ? const Text("Remove Wishlist")
+                                        : const Text("Add to Wishlist"),
                                   ),
                                 ),
-                          const SizedBox(
-                              width: 10), // Add spacing between the buttons
+                          const SizedBox(width: 10),
                           Expanded(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
                               onPressed: () {
                                 register_to_hackathon();
@@ -364,12 +568,12 @@ class _hacakthonviewState extends State<hacakthonview> {
                                   isregistred(registred);
                                 });
                               },
-                              child: Text("Register"),
+                              child: const Text("Register"),
                             ),
                           ),
                         ],
                       ),
-              )
+              ),
             ],
           ),
         ),

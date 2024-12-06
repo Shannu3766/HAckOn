@@ -321,7 +321,7 @@ class _AddHackathonState extends State<AddHackathon> {
                               ),
                             ),
                           ),
-                          initialValue: "Hackon",
+                          // initialValue: "Hackon",
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter a name';
@@ -339,7 +339,7 @@ class _AddHackathonState extends State<AddHackathon> {
                           height: 20,
                         ),
                         TextFormField(
-                          initialValue: "kjdnskjf ",
+                          // initialValue: "kjdnskjf ",
                           style: TextStyle(
                             color: const Color.fromARGB(255, 0, 0,
                                 0), // Text being written is set to white
@@ -429,7 +429,7 @@ class _AddHackathonState extends State<AddHackathon> {
                                 Icons.location_on,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               )),
-                          initialValue: "Kochi",
+                          // initialValue: "Kochi",
                           style: TextStyle(
                             color: const Color.fromARGB(255, 0, 0,
                                 0), // Text being written is set to white

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
 import 'package:hackon/screens/faculty/hackathon_item_for_faculty_total_list.dart';
 
-
 class totalhackathonlist extends StatefulWidget {
   @override
   _totalhackathonlistState createState() => _totalhackathonlistState();
@@ -61,7 +60,7 @@ class _totalhackathonlistState extends State<totalhackathonlist> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_item_for_faculty_total_list(
+                child: HackathonItemForFacultyTotalList(
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
                   location: hackathon.location,

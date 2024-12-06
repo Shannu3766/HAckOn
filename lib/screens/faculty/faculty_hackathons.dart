@@ -64,7 +64,7 @@ class _viewmyhackathonsState extends State<viewmyhackathons> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_item_for_faculty_total_list(
+                child: HackathonItemForFacultyTotalList(
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
                   location: hackathon.location,

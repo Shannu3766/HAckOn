@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hackon/screens/Student/update_student_details.dart';
+import 'package:hackon/screens/faculty/Update_faculty_details.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -38,8 +40,19 @@ class _AuthScreenState extends State<AuthScreen> {
           );
           var displayname = userCred.user!.displayName;
           if (displayname == selectedRole) {
-            print("Logged in as $selectedRole");
-            print(userCred);
+            if (selectedRole == 'Student') {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const UpdateStudentDetails(),
+                ),
+              );
+            } else {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const UpdateFacultyDetails(),
+                ),
+              );
+            }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -50,15 +63,6 @@ class _AuthScreenState extends State<AuthScreen> {
             _firebase.signOut();
             return;
           }
-
-          // Update display name to the selected role
-
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   SnackBar(
-          //     content: Text('Logged in successfully as $selectedRole!'),
-          //     backgroundColor: Colors.green,
-          //   ),
-          // );
         } else {
           // Sign-up logic
           if (password == confirmpassword) {
@@ -66,17 +70,20 @@ class _AuthScreenState extends State<AuthScreen> {
               email: username,
               password: password,
             );
-
-            // Update display name to the selected role
             await userCred.user!.updateDisplayName(selectedRole);
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Account created successfully as $selectedRole!'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            print(userCred);
+            if (selectedRole == 'Student') {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const UpdateStudentDetails(),
+                ),
+              );
+            } else {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const UpdateFacultyDetails(),
+                ),
+              );
+            }
           } else {
             // Passwords do not match
             ScaffoldMessenger.of(context).showSnackBar(
@@ -134,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/icon.jpg"),
+                    backgroundImage: AssetImage("assets/images/icon.png"),
                     radius: MediaQuery.of(context).size.width * 0.3,
                   ),
                   SizedBox(
@@ -159,7 +166,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   ),
                                 ),
                               ),
-                              initialValue: "hello@gmail.com",
+                              // initialValue: "hello@gmail.com",
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value!.isEmpty || !value.contains('@')) {
@@ -199,7 +206,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 ),
                               ),
                               obscureText: _obscurepassword,
-                              initialValue: '1234567',
+                              // initialValue: '1234567',
                               validator: (value) {
                                 if (value!.isEmpty || value.length < 7) {
                                   return 'Password must be at least 7 characters long';
@@ -240,7 +247,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   ),
                                 ),
                                 obscureText: true,
-                                initialValue: '1234567',
+                                // initialValue: '1234567',
                                 validator: (value) {
                                   if (value!.isEmpty || value.length < 7) {
                                     return 'Password must be at least 7 characters long';

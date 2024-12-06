@@ -64,13 +64,13 @@ class _WishlistscreenState extends State<Wishlistscreen> {
               final hackathon = hackathons[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: hackathon_item(
-                  iswishlist: true,
+                child: HackathonItem(
+                  isWishlist: true,
                   name: hackathon.name,
                   imageUrl: hackathon.imageUrl,
                   location: hackathon.location,
-                  startdate: hackathon.startDate,
-                  starttime: hackathon.starttime,
+                  startDate: hackathon.startDate,
+                  startTime: hackathon.starttime,
                   hackathon: hackathon,
                 ),
               );
