@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hackon/screens/Student/student_screen.dart';
+import 'package:hackon/screens/Student/student_home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -125,7 +125,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
       const SnackBar(content: Text('Student details updated successfully!')),
     );
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return const Student_screen();
+      return const Student_home_screen();
     }));
   }
 

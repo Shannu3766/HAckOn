@@ -5,8 +5,8 @@ import 'package:hackon/classes/hackathon.dart';
 import 'package:hackon/widgets/placeholder_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class hacakthonview extends StatefulWidget {
-  hacakthonview({
+class hackathon_details extends StatefulWidget {
+  hackathon_details({
     super.key,
     required this.hackathon,
     required this.iswishlist,
@@ -14,10 +14,10 @@ class hacakthonview extends StatefulWidget {
   final Hackathon hackathon;
   bool iswishlist;
   @override
-  State<hacakthonview> createState() => _hacakthonviewState();
+  State<hackathon_details> createState() => _hackathon_detailsState();
 }
 
-class _hacakthonviewState extends State<hacakthonview> {
+class _hackathon_detailsState extends State<hackathon_details> {
   var faculty_name = "";
   var faculty_image = "";
   var student_name = "";
@@ -208,173 +208,6 @@ class _hacakthonviewState extends State<hacakthonview> {
     super.initState();
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   var date =
-  //       '${widget.hackathon.startDate.day}/${widget.hackathon.startDate.month}';
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: Text(widget.hackathon.name),
-  //       actions: [
-  //         widget.iswishlist
-  //             ? const SizedBox()
-  //             : IconButton(
-  //                 onPressed: () {
-  //                   FirebaseAuth.instance.signOut();
-  //                 },
-  //                 icon: Icon(Icons.exit_to_app))
-  //       ],
-  //     ),
-  //     body: SingleChildScrollView(
-  //       child: Padding(
-  //         padding: EdgeInsets.only(
-  //           left: MediaQuery.of(context).size.width * 0.05,
-  //           right: MediaQuery.of(context).size.width * 0.05,
-  //         ),
-  //         child: Column(
-  //           children: [
-  //             Padding(
-  //               padding: const EdgeInsets.only(top: 10, bottom: 10),
-  //               child: Container(
-  //                 width: MediaQuery.of(context).size.width * 0.9,
-  //                 height: MediaQuery.of(context).size.height * 0.2,
-  //                 child: FadeInImage(
-  //                   placeholder: MemoryImage(kTransparentImage),
-  //                   image: NetworkImage(widget.hackathon.imageUrl),
-  //                 ),
-  //               ),
-  //             ),
-  //             const Text(
-  //               "Workshop Details",
-  //               style: TextStyle(
-  //                 color: Colors.black,
-  //                 fontSize: 30,
-  //               ),
-  //               textAlign: TextAlign.left,
-  //             ),
-  //             const SizedBox(
-  //               height: 20,
-  //             ),
-  //             Row(
-  //               children: [
-  //                 Traititem(
-  //                     icon: Icons.location_on,
-  //                     label: widget.hackathon.location),
-  //                 Spacer(),
-  //                 Traititem(icon: Icons.calendar_month, label: date),
-  //                 SizedBox(width: MediaQuery.of(context).size.width * 0.1)
-  //               ],
-  //             ),
-  //             const SizedBox(
-  //               height: 20,
-  //             ),
-  //             const Align(
-  //               alignment: Alignment.centerLeft,
-  //               child: Text(
-  //                 "About",
-  //                 style: TextStyle(
-  //                   color: Colors.black,
-  //                   fontSize: 25,
-  //                 ),
-  //               ),
-  //             ),
-  //             Text(widget.hackathon.description),
-  //             const SizedBox(
-  //               height: 30,
-  //             ),
-  //             const Text(
-  //               "Faculty Details",
-  //               style: TextStyle(
-  //                 color: Colors.black,
-  //                 fontSize: 30,
-  //               ),
-  //               textAlign: TextAlign.left,
-  //             ),
-  //             Row(
-  //               children: [
-  //                 CircleAvatar(
-  //                   backgroundImage: NetworkImage(faculty_image),
-  //                   radius: 30,
-  //                 ),
-  //                 const SizedBox(
-  //                   width: 20,
-  //                 ),
-  //                 Text(
-  //                   faculty_name,
-  //                   style: TextStyle(fontSize: 15),
-  //                 )
-  //               ],
-  //             ),
-  //             const SizedBox(
-  //               height: 40,
-  //             ),
-  //             Padding(
-  //               padding: const EdgeInsets.only(bottom: 20),
-  //               child: registred_to_hackathon
-  //                   ? Row(
-  //                       children: [
-  //                         Expanded(
-  //                             child: ElevatedButton.icon(
-  //                                 style: ElevatedButton.styleFrom(
-  //                                   backgroundColor: Colors.green,
-  //                                 ),
-  //                                 onPressed: () {},
-  //                                 label: Text("Registred"))),
-  //                       ],
-  //                     )
-  //                   : Row(
-  //                       children: [
-  //                         widget.iswishlist
-  //                             ? const SizedBox(
-  //                                 width: 0,
-  //                               )
-  //                             : Expanded(
-  //                                 child: ElevatedButton.icon(
-  //                                   icon: ispresent
-  //                                       ? Icon(Icons.highlight_remove)
-  //                                       : Icon(Icons.add),
-  //                                   style: ElevatedButton.styleFrom(
-  //                                     backgroundColor: const Color.fromARGB(
-  //                                         255, 54, 235, 244),
-  //                                   ),
-  //                                   onPressed: () {
-  //                                     ispresent
-  //                                         ? removehackathonfromwishlist()
-  //                                         : add_hackathonto_wishlist();
-  //                                     setState(() {
-  //                                       wishlist(widget.hackathon.createdBy,
-  //                                           wishlist_id);
-  //                                     });
-  //                                   },
-  //                                   label: ispresent
-  //                                       ? Text("Wishlist")
-  //                                       : Text("Add to Wishlist"),
-  //                                 ),
-  //                               ),
-  //                         const SizedBox(
-  //                             width: 10), // Add spacing between the buttons
-  //                         Expanded(
-  //                           child: ElevatedButton(
-  //                             style: ElevatedButton.styleFrom(
-  //                               backgroundColor: Colors.green,
-  //                             ),
-  //                             onPressed: () {
-  //                               register_to_hackathon();
-  //                               setState(() {
-  //                                 isregistred(registred);
-  //                               });
-  //                             },
-  //                             child: Text("Register"),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
   @override
   Widget build(BuildContext context) {
     var date =

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hackon/screens/Student/registred_hackathons.dart';
 import 'package:hackon/screens/Student/student_profile.dart';
-import 'package:hackon/screens/wishlist.dart';
-import 'package:hackon/widgets/view_hackathon.dart';
+import 'package:hackon/screens/wishlist_screen.dart';
+import 'package:hackon/screens/Hackathon_list.dart';
 
-class Student_screen extends StatefulWidget {
-  const Student_screen({super.key});
+class Student_home_screen extends StatefulWidget {
+  const Student_home_screen({super.key});
 
   @override
-  State<Student_screen> createState() => _Student_screenState();
+  State<Student_home_screen> createState() => _Student_home_screenState();
 }
 
-class _Student_screenState extends State<Student_screen> {
+class _Student_home_screenState extends State<Student_home_screen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-    Expanded(child: ViewHackathon()),
+    Expanded(child: Hackathon_list()),
     Wishlistscreen(),
     RegistredHackathons(),
     ProfilePage_student(),

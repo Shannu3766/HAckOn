@@ -6,12 +6,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddHackathon extends StatefulWidget {
+class create_hacakthon extends StatefulWidget {
   @override
-  _AddHackathonState createState() => _AddHackathonState();
+  _create_hacakthonState createState() => _create_hacakthonState();
 }
 
-class _AddHackathonState extends State<AddHackathon> {
+class _create_hacakthonState extends State<create_hacakthon> {
   var _isuploading = false;
   final user = FirebaseAuth.instance.currentUser!;
   var name = "";

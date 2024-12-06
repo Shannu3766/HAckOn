@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/screens/Student/hacakthon_view.dart';
+import 'package:hackon/widgets/hackathon_details.dart';
 import 'package:hackon/widgets/placeholder_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -41,7 +41,7 @@ class _hackathon_view_tofaculty_itemState
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => hacakthonview(
+            builder: (context) => hackathon_details(
               hackathon: widget.hackathon,
               iswishlist: widget.iswishlist,
             ),

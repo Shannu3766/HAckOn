@@ -33,7 +33,6 @@ class _AuthScreenState extends State<AuthScreen> {
       _formkey.currentState?.save();
       try {
         if (islogin) {
-          // Login logic
           final userCred = await _firebase.signInWithEmailAndPassword(
             email: username,
             password: password,

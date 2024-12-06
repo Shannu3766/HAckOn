@@ -20,15 +20,11 @@ class facultystatehandler extends StatelessWidget {
           final photoURL = user.photoURL;
 
           if (photoURL == null) {
-            // Navigate to page for users without a photo
             return const UpdateFacultyDetails();
           } else {
-            // Navigate to page for users with a photo
             return const FacultyHomeScreen();
           }
         }
-
-        // Handle case where user is not logged in
         return const Center(
           child: Text('No user is logged in.'),
         );

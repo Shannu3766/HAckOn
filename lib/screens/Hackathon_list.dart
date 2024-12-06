@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/classes/hackathon.dart';
-import 'package:hackon/widgets/placeholder.dart';
+import 'package:hackon/widgets/Hackathon_item.dart';
 
-class ViewHackathon extends StatefulWidget {
+class Hackathon_list extends StatefulWidget {
   @override
-  _ViewHackathonState createState() => _ViewHackathonState();
+  _Hackathon_listState createState() => _Hackathon_listState();
 }
 
-class _ViewHackathonState extends State<ViewHackathon> {
+class _Hackathon_listState extends State<Hackathon_list> {
   late Future<List<Hackathon>> _hackathonsFuture;
 
   Future<List<Hackathon>> fetchHackathons() async {

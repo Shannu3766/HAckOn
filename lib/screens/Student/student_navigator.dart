@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hackon/screens/Student/student_screen.dart';
+import 'package:hackon/screens/Student/student_home_screen.dart';
 import 'package:hackon/screens/Student/update_student_details.dart';
 
 class StudentNavigator extends StatelessWidget {
@@ -20,15 +20,11 @@ class StudentNavigator extends StatelessWidget {
           final photoURL = user.photoURL;
 
           if (photoURL == null) {
-            // Navigate to page for users without a photo
             return const UpdateStudentDetails();
           } else {
-            // Navigate to page for users with a photo
-            return const Student_screen();
+            return const Student_home_screen();
           }
         }
-
-        // Handle case where user is not logged in
         return const Center(
           child: Text('No user is logged in.'),
         );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hackon/screens/add_hackathon.dart';
+import 'package:hackon/screens/faculty/create_hacakthon.dart';
 import 'package:hackon/screens/faculty/Profilepage.dart';
 import 'package:hackon/screens/faculty/faculty_hackathons.dart';
-import 'package:hackon/screens/faculty/totalhackathonlist.dart';
+import 'package:hackon/screens/faculty/hackathon_lists.dart';
 
 class FacultyHomeScreen extends StatefulWidget {
   const FacultyHomeScreen({super.key});
@@ -16,7 +16,7 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
   final List<Widget> _pages = [
     Expanded(child: totalhackathonlist()),
     viewmyhackathons(),
-    AddHackathon(),
+    create_hacakthon(),
     ProfilePage(),
   ];
   @override

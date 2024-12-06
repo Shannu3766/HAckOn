@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hackon/screens/AuthScreen.dart';
+import 'package:hackon/screens/Authentication.dart';
 import 'package:hackon/screens/Student/student_navigator.dart';
 import 'package:hackon/screens/faculty/faculty_navigator.dart';
 
