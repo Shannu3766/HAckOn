@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackon/screens/AuthScreen.dart';
-import 'package:hackon/screens/faculty/Faculty_screen.dart';
-import 'package:hackon/screens/faculty/Update_faculty_details.dart';
-import 'package:hackon/screens/Student/student_screen.dart';
-import 'package:hackon/screens/Student/update_student_details.dart';
+import 'package:hackon/screens/Student/student_navigator.dart';
 import 'package:hackon/screens/faculty/faculty_navigator.dart';
 
 import 'firebase_options.dart';
@@ -34,19 +31,10 @@ class MyApp extends StatelessWidget {
               final displayName = user.displayName;
               final url = user.photoURL;
               if (displayName == "Faculty") {
-                // if (url == null) {
-                // return const UpdateFacultyDetails();
                 return const facultystatehandler();
-                // } else {
-                // return FacultyHomeScreen();
-                // }
               }
               if (displayName == "Student") {
-                // if (url == null) {
-                return const UpdateStudentDetails();
-                // } else {
-                // return Student_screen();
-                // }
+                return const StudentNavigator();
               }
             }
             return const AuthScreen();
