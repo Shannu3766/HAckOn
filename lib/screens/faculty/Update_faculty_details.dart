@@ -110,7 +110,8 @@ class _UpdateFacultyDetailsState extends State<UpdateFacultyDetails> {
     setState(() {
       _isUploading = false;
     });
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => FacultyHomeScreen()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => FacultyHomeScreen()));
   }
 
   @override

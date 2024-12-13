@@ -44,7 +44,7 @@ class Abouthacko extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 25,
+            size: 15,
             color: const Color.fromARGB(255, 0, 0, 0),
           ),
           const SizedBox(width: 4),
@@ -52,7 +52,7 @@ class Abouthacko extends StatelessWidget {
             label,
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
-              fontSize: 20,
+              fontSize: 13,
             ),
           ),
         ],

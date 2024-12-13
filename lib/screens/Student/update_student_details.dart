@@ -124,7 +124,7 @@ class _UpdateStudentDetailsState extends State<UpdateStudentDetails> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Student details updated successfully!')),
     );
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
       return const Student_home_screen();
     }));
   }

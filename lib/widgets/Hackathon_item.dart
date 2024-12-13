@@ -97,9 +97,9 @@ class _HackathonItemState extends State<HackathonItem> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Abouthacko(icon: Icons.schedule, label: time),
-                        Abouthacko(icon: Icons.calendar_today, label: date),
-                        Abouthacko(
+                        Traititem(icon: Icons.schedule, label: time),
+                        Traititem(icon: Icons.calendar_today, label: date),
+                        Traititem(
                             icon: Icons.location_on, label: widget.location),
                       ],
                     ),

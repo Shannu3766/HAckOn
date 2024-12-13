@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final user = FirebaseAuth.instance.currentUser!;
               final displayName = user.displayName;
-              final url = user.photoURL;
               if (displayName == "Faculty") {
                 return const facultystatehandler();
               }
